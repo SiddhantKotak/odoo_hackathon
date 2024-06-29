@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdOutlineAddAPhoto } from "react-icons/md";
 import "../styles.css";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { AppContext, Context } from "../Context/UseContext";
+import axios from "axios";
 
 interface Props {
   option: string;
@@ -26,6 +28,21 @@ function submitHandler(e: { preventDefault: () => void }) {
 
 const FurnitureProfile = () => {
   const navigate = useNavigate();
+  const { rented, setRented } = useContext(AppContext) as Context;
+
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+  async function sendRequest() {
+    try {
+      const res = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, rented);
+      setRented({
+        ...rented,
+        id: res.data.id,
+      });
+    } catch (e) {
+      alert("Error while login in");
+    }
+  }
 
   return (
     <div className="flex flex-col overflow-x-hidden relative min-h-screen">
@@ -45,6 +62,12 @@ const FurnitureProfile = () => {
               <input
                 type="text"
                 className="border-dimgray-400 border-[2px] w-[70%]  h-[3.4rem]"
+                onChange={(e) => {
+                  setRented({
+                    ...rented,
+                    title: e.target.value,
+                  });
+                }}
               ></input>
               <p className="py-[1.2rem]   text-[#6a6a6a]">
                 Mention the key features of your item(eg:brand , model name)
@@ -54,7 +77,15 @@ const FurnitureProfile = () => {
             <div className="flex flex-col space-[-1rem]" id="br">
               <p className="text-[1.1rem]">Description:</p>
 
-              <textarea className="border-dimgray-400 border-[2px] w-[70%] h-[5.3rem]"></textarea>
+              <textarea
+                className="border-dimgray-400 border-[2px] w-[70%] h-[5.3rem]"
+                onChange={(e) => {
+                  setRented({
+                    ...rented,
+                    description: e.target.value,
+                  });
+                }}
+              ></textarea>
               <p className="py-[1.2rem]  text-[#6a6a6a]  ">
                 Include condition, features and reason for selling
               </p>
@@ -65,21 +96,46 @@ const FurnitureProfile = () => {
               <input
                 type="text"
                 className="border-dimgray-400 border-[2px] w-[70%]  h-[3.4rem]"
+                onChange={(e) => {
+                  setRented({
+                    ...rented,
+                    price: Number(e.target.value),
+                  });
+                }}
               ></input>
               <p className="py-[1.2rem]  text-[#6a6a6a]">
                 Enter the price at which you wish to rent out
               </p>
             </div>
 
-            <div className="flex flex-col space-[-1rem]" id="br">
-              <p className="text-[1.1rem]">Select Type of Furniture :</p>
-              <input
-                type="text"
-                className="border-dimgray-400 border-[2px] w-[70%]  h-[3.4rem]"
-              ></input>
-              <p className="py-[1.2rem]  text-[#6a6a6a]">
-                Enter the price at which you wish to rent out
-              </p>
+            <div className="flex flex-col space-y-[-1rem] py-[1.2rem]" id="br">
+              <p className="text-[1.1rem]">Type of Furniture:</p>
+              <select
+                className="border-dimgray-400 border-[2px] w-[70%] h-[3.4rem]"
+                onChange={(e) => {
+                  setRented({
+                    ...rented,
+                    type: e.target.value,
+                  });
+                }}
+              >
+                <option value="">Select a type</option>
+                <option value="Sofa">Sofa</option>
+                <option value="Chair">Chair</option>
+                <option value="Table">Table</option>
+                <option value="Bed">Bed</option>
+                <option value="Desk">Desk</option>
+                <option value="Wardrobe">Wardrobe</option>
+                <option value="Bookshelf">Bookshelf</option>
+                <option value="Dining Table">Dining Table</option>
+                <option value="Coffee Table">Coffee Table</option>
+                <option value="TV Stand">TV Stand</option>
+                <option value="Dresser">Dresser</option>
+                <option value="Nightstand">Nightstand</option>
+                <option value="Cabinet">Cabinet</option>
+                <option value="Recliner">Recliner</option>
+                <option value="Ottoman">Ottoman</option>
+              </select>
             </div>
 
             <div className="flex flex-col space-[-1rem]" id="br">
@@ -87,20 +143,15 @@ const FurnitureProfile = () => {
               <input
                 type="text"
                 className="border-dimgray-400 border-[2px] w-[70%]  h-[3.4rem]"
+                onChange={(e) => {
+                  setRented({
+                    ...rented,
+                    quantity: Number(e.target.value),
+                  });
+                }}
               ></input>
               <p className="py-[1.2rem]  text-[#6a6a6a]">
                 Enter the quantity of the product
-              </p>
-            </div>
-
-            <div className="flex flex-col space-[-1rem]" id="br">
-              <p className="text-[1.1rem]">Address :</p>
-              <input
-                type="text"
-                className="border-dimgray-400 border-[2px] w-[70%]  h-[3.4rem]"
-              ></input>
-              <p className="py-[1.2rem]   text-[#6a6a6a]">
-                The Address at which the furniture will be available
               </p>
             </div>
 
@@ -134,6 +185,7 @@ const FurnitureProfile = () => {
                 type="submit"
                 value="submit"
                 onClick={() => {
+                  sendRequest();
                   navigate("/addFurniture");
                 }}
               >
