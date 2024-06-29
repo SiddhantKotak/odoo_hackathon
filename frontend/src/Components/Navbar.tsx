@@ -20,6 +20,9 @@ const Photo = (username: string) => {
 const Navbar = () => {
   const { loggedIn, username } = useContext(AppContext) as Context;
   const navigate = useNavigate();
+
+  function handleKey(e: React.KeyboardEvent<HTMLInputElement>) {}
+
   return (
     <div className="bg-white shadow-lg h-[4rem] md:h-[5rem] flex justify-between ">
       <a
@@ -36,33 +39,13 @@ const Navbar = () => {
       <nav className=" hidden md:contents font-semibold  text-base lg:text-lg">
         <ul className="flex items-center ml-4 xl:ml-8 mr-auto">
           <li className="p-3 xl:p-6 active">
-            <a href="">
-              <div className="hover:bg-slate-500 w-[6rem] h-[2.5rem] items-center  transition duration-200 rounded-xl flex justify-center">
-                Home
-              </div>
-            </a>
-          </li>
-          <li className="p-3 xl:p-6">
-            <a href="">
-              <div className="hover:bg-slate-500 w-[7rem] h-[2.5rem] items-center  transition duration-200 rounded-xl flex justify-center">
-                Services
-              </div>
-            </a>
-          </li>
-          <li className="p-3 xl:p-6">
-            <a href="">
-              <div className="hover:bg-slate-500 w-[6rem] h-[2.5rem] items-center  transition duration-200 rounded-xl flex justify-center">
-                About
-              </div>
-            </a>
-          </li>
-
-          <li className="p-3 xl:p-6">
-            <a href="">
-              <div className="hover:bg-slate-500 w-[8rem] h-[2.5rem] items-center  transition duration-200 rounded-xl flex justify-center">
-                Contacts
-              </div>
-            </a>
+            <div className="flex items-center">
+              <input
+                className="w-[40rem] h-[3rem] ml-[3rem] text-black  text-[1.2rem] pl-[1rem] border-2 border-black rounded-tl-lg rounded-bl-lg flex items-center bg-white"
+                placeholder="Search Furniture"
+                onKeyDown={(event) => handleKey(event)}
+              />
+            </div>
           </li>
         </ul>
       </nav>
