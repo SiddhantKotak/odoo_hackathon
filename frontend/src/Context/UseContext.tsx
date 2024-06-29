@@ -3,7 +3,6 @@ import { createContext, useState } from "react";
 type User = {
   name: string;
   email: string;
-  password: string;
 };
 
 type Profile = {
@@ -17,6 +16,7 @@ type Profile = {
 };
 
 type Rented = {
+  id: string;
   title: string;
   type: string;
   description: string;
@@ -27,6 +27,16 @@ type Rented = {
   price: Number;
 };
 
+type Booked = {
+  id: string;
+  title: string;
+  type: string;
+  description: string;
+  availableTill: Date;
+  quantity: Number;
+  price: Number;
+};
+
 export interface Context {
   loggedIn: boolean;
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,10 +44,14 @@ export interface Context {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   dropdown: boolean;
   setDropdown: React.Dispatch<React.SetStateAction<boolean>>;
-  user: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
+  logUser: User;
+  setLogUser: React.Dispatch<React.SetStateAction<User>>;
   profile: Profile;
   setProfile: React.Dispatch<React.SetStateAction<Profile>>;
+  rented: Rented;
+  setRented: React.Dispatch<React.SetStateAction<Rented>>;
+  booked: Booked;
+  setBooked: React.Dispatch<React.SetStateAction<Booked>>;
 }
 
 export const AppContext = createContext<Context | null>(null);
@@ -48,10 +62,9 @@ const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [dropdown, setDropdown] = useState<boolean>(false);
-  const [user, setUser] = useState<User>({
+  const [logUser, setLogUser] = useState<User>({
     name: "",
     email: "",
-    password: "",
   });
   const [profile, setProfile] = useState<Profile>({
     username: "",
@@ -61,6 +74,25 @@ const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
     area: "",
     address: "",
     phone_num: "",
+  });
+  const [rented, setRented] = useState<Rented>({
+    id: "",
+    title: "",
+    type: "",
+    description: "",
+    quantity: 0,
+    availibility: true,
+    price: 0,
+  });
+
+  const [booked, setBooked] = useState<Booked>({
+    id: "",
+    title: "",
+    type: "",
+    description: "",
+    availableTill: new Date(),
+    quantity: 0,
+    price: 0,
   });
 
   return (
@@ -72,10 +104,14 @@ const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
         setUsername,
         dropdown,
         setDropdown,
-        user,
-        setUser,
+        logUser,
+        setLogUser,
         profile,
         setProfile,
+        rented,
+        setRented,
+        booked,
+        setBooked,
       }}
     >
       {children}

@@ -6,6 +6,7 @@ import { RiArmchairFill } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
 import "./styles.css";
 import { AppContext, Context } from "../Context/UseContext";
+import { useNavigate } from "react-router-dom";
 
 // interface Props {
 //   // logo: string;
@@ -15,6 +16,7 @@ import { AppContext, Context } from "../Context/UseContext";
 
 const DropDown = () => {
   const { username } = useContext(AppContext) as Context;
+  const navigate = useNavigate();
 
   return (
     <div className="hero">
@@ -34,7 +36,7 @@ const DropDown = () => {
             <hr />
 
             <a
-              href="#"
+              href="/userInfo"
               className="sub-menu-link no-underline flex items-center justify-start space-x-3  text-white text-[1rem]"
             >
               <CgProfile size={30} />
@@ -42,7 +44,7 @@ const DropDown = () => {
               <span>{">"}</span>
             </a>
             <a
-              href="#"
+              href="/editProfile"
               className="sub-menu-link no-underline flex items-center justify-start space-x-3  text-white text-[1rem]"
             >
               <FaUserEdit size={30} />
@@ -50,7 +52,7 @@ const DropDown = () => {
               <span>{">"}</span>
             </a>
             <a
-              href="#"
+              href="/addFurniture"
               className="sub-menu-link no-underline flex items-center justify-start space-x-3  text-white text-[1rem]"
             >
               <RiArmchairFill size={30} />
