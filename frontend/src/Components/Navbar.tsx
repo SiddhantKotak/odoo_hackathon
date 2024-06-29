@@ -4,11 +4,15 @@ import { useContext } from "react";
 import { AppContext } from "../Context/UseContext";
 import { Context } from "../Context/UseContext";
 import { useNavigate } from "react-router-dom";
+import { TiArrowSortedDown } from "react-icons/ti";
 
 const Photo = (username: string) => {
   return (
-    <button className="w-[3.5rem] h-[3.5rem] rounded-full flex justify-center text-2xl items-center bg-black text-white">
-      {username[0].toUpperCase()}
+    <button className="flex justify-center gap-2 items-center">
+      <div className="w-[3.5rem] h-[3.5rem] rounded-full flex justify-center text-2xl items-center bg-black text-white">
+        {username[0].toUpperCase()}
+      </div>
+      <TiArrowSortedDown size={25} />
     </button>
   );
 };
@@ -22,11 +26,6 @@ const Navbar = () => {
         href=""
         className="md:border max-w-[12rem] h-full md:flex-shrink-0 flex items-center justify-center md:px-4 lg:px-6 xl:px-8"
       >
-        {/* <img
-              className=""
-              src="https://i.ibb.co/W6ZXdqN/2021-10-26-16h20-21.png"
-              alt=""
-            /> */}
         <span className="text-xl font-bold">DallaSphere</span>
       </a>
       <div className="md:hidden border w-[4rem] flex items-center justify-center">
