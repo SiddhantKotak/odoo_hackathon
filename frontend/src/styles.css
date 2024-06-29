@@ -1,0 +1,25 @@
+.abc ::-ms-reveal{
+    display: none;
+
+}
+
+#border{
+    border:2px solid black;
+    margin-top: 1px;
+}
+
+#outer{
+    border: 1px solid gray;
+    border-radius: 6px;
+
+}
+
+input{
+    font-weight: 600;
+    font-size: medium;
+    color: black;
+}
+
+#br{
+    border-bottom: 1px solid gray;
+}

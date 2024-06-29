@@ -24,7 +24,7 @@ const Navbar = () => {
   function handleKey(e: React.KeyboardEvent<HTMLInputElement>) {}
 
   return (
-    <div className="bg-white shadow-lg h-[4rem] md:h-[5rem] flex justify-between ">
+    <div className="w-screen bg-white shadow-lg h-[4rem] md:h-[5rem] flex justify-between fixed z-10">
       <a
         href=""
         className="md:border max-w-[12rem] h-full md:flex-shrink-0 flex items-center justify-center md:px-4 lg:px-6 xl:px-8"

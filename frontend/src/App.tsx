@@ -5,6 +5,8 @@ import React from "react";
 import SignUp from "./Pages/SignUp";
 import LogIn from "./Pages/LogIn";
 import AskPassword from "./Pages/AskPassword";
+import AddFurniture from "./Pages/AddFurniture";
+import FurnitureProfile from "./Pages/FurnitureProfile";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/setpassword" element={<AskPassword />} />
+          <Route path="/addFurniture" element={<AddFurniture />} />
+          <Route path="/furnitureProfile" element={<FurnitureProfile />} />
         </Routes>
       </BrowserRouter>
     </>
