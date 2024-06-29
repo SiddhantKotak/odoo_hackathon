@@ -1,7 +1,8 @@
 .hero {
-  width: 100%;
-  min-height: 100vh;
   position: fixed;
+  background-color: rebeccapurple;
+  right: 0.1rem;
+  top: 0.1rem;
   z-index: 100;
 }
 nav {
