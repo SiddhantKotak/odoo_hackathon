@@ -15,7 +15,9 @@ import { FcGoogle } from "react-icons/fc";
 type User = Omit<TokenResponse, "error" | "error_description" | "error_uri">;
 
 const GoogleButton = ({ type }: { type: "SignUp" | "Login" }) => {
-  const { setLoggedIn, setUsername } = useContext(AppContext) as Context;
+  const { setLoggedIn, setUsername, setLogUser } = useContext(
+    AppContext
+  ) as Context;
   const navigate = useNavigate();
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -28,6 +30,11 @@ const GoogleButton = ({ type }: { type: "SignUp" | "Login" }) => {
       const data = res.data;
       if (data.status == 200) {
         googleLogout();
+
+        setLogUser({
+          name: signup.name,
+          email: signup.email,
+        });
         localStorage.setItem("token", data.message);
         setUsername(data.name);
         navigate("/setpassword");

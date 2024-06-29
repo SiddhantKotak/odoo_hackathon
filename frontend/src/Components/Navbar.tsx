@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { IoSearch } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
+import DropDown from "./DropDown";
 
 const Photo = (
   username: string,
@@ -54,7 +55,8 @@ const Navbar = () => {
   }
 
   return (
-    <>
+    <div className="relative">
+      {dropdown ? <DropDown /> : null}
       <div className="bg-white w-screen border-b-black fixed z-10 shadow-lg h-[4rem] md:h-[5rem] flex justify-between ">
         <a
           href=""
@@ -118,7 +120,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
