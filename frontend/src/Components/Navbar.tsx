@@ -54,6 +54,7 @@ const Navbar = () => {
   }
 
   return (
+
     <>
       <div className="bg-white w-screen border-b-black fixed z-10 shadow-lg h-[4rem] md:h-[5rem] flex justify-between ">
         <a
