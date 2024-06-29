@@ -5,7 +5,7 @@
     "deploy": "wrangler deploy --minify src/index.ts"
   },
   "dependencies": {
-    "@anshpatel2434/odoo-combat": "^1.0.0",
+    "@anshpatel2434/odoo-combat": "^1.0.1",
     "@prisma/extension-accelerate": "^1.1.0",
     "hono": "^4.4.7",
     "prisma": "^5.15.1"
