@@ -36,7 +36,6 @@ profileRouter.use("/*", async (c, next) => {
 });
 
 profileRouter.post("/add", async (c) => {
-  return c.text("success");
   const body = await c.req.json();
 
   const prisma = new PrismaClient({
@@ -56,9 +55,7 @@ profileRouter.post("/add", async (c) => {
         phone_num: body.phone_num,
       },
     });
-    return c.json({
-      message: "created",
-    });
+    return c.json(profile);
   } catch (e) {
     return c.json({
       message: e,
@@ -72,7 +69,7 @@ profileRouter.get("/all", async (c) => {
   }).$extends(withAccelerate());
   try {
     const profile = await prisma.profile.findUnique({
-      where: { id: c.get("userId") },
+      where: { userId: c.get("userId") },
     });
     return c.json({ profile: profile });
   } catch (e) {
@@ -91,7 +88,7 @@ profileRouter.put("/update", async (c) => {
 
   try {
     const profile = await prisma.profile.update({
-      where: { id: c.get("userId") },
+      where: { userId: c.get("userId") },
       data: {
         username: body.username,
         house_no: body.house_no,
